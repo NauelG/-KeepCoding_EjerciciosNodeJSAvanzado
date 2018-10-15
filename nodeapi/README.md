@@ -24,6 +24,14 @@ To start the application in production use:
 npm start
 ```
 
+## Cluster
+
+To start the application in cluster mode:
+
+```shell
+npm run cluster
+```
+
 
 ## Development
 
