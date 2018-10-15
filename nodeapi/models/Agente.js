@@ -2,24 +2,24 @@
 
 const mongoose = require('mongoose');
 
-// Definir un esquema
+// definir un esquema
 const agenteSchema = mongoose.Schema({
-    name: String,
-    age: Number
+  name: String,
+  age: Number
 });
 
-// creamos un método estatico
+// creamos un método estático
 agenteSchema.statics.listar = function(filtro, limit, skip, fields, sort) {
-    const query = Agente.find(filtro);
-    query.limit(limit);
-    query.skip(skip);
-    query.select(fields);
-    query.sort(sort);
-    return query.exec();
+  const query = Agente.find(filtro);
+  query.limit(limit);
+  query.skip(skip);
+  query.select(fields);
+  query.sort(sort);
+  return query.exec();
 }
 
-// Crear el modelo con ese esquema
+// crear el modelo con ese esquema
 const Agente = mongoose.model('Agente', agenteSchema);
 
-// Y, aunque no haga falta, lo exportamos
+// y aunque no haga falta, lo exportamos
 module.exports = Agente;

@@ -11,6 +11,7 @@ Copy .env.example to .env and review the values.
 ## Database
 
 To initialize the database use:
+
 ```shell
 npm run install_db
 ```
@@ -23,9 +24,10 @@ To start the application in production use:
 npm start
 ```
 
+
 ## Development
 
-To run the application in develompent use:
+To run the application in development use:
 
 ```shell
 npm run dev
