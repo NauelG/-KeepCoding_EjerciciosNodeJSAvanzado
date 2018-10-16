@@ -1,4 +1,5 @@
 {
 	"Application title": "Application title",
-	"Name and age": "Hello, my name is {{name}} and I'm {{age}} years old."
+	"Name and age": "Hello, my name is {{name}} and I'm {{age}} years old.",
+	"This is an amazing app!": "This is an amazing app!"
 }
