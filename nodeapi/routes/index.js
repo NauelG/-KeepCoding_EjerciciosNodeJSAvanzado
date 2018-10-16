@@ -11,7 +11,6 @@ const validationResult = validator.validationResult;*/
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-  process.send('Hola master, soy el worker:'+process.pid);
   
   const segundo = (new Date()).getSeconds();
 
