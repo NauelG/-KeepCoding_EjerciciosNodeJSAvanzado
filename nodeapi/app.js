@@ -21,6 +21,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/pdfs', express.static('e:\pdfs'));
 
+// Configuramos multiidioma en express
+const i18n = require('./lib/i18nConfigure')();
+app.use(i18n.init);
+
+console.log(i18n.__('Application title'));
+console.log(i18n.__('Name and age', {name: 'Javier', age: 46}));
+console.log(i18n.__({phrase: 'Application title', locale: 'es'})); // Forzar locale
+
 // Variables globales de template
 app.locals.titulo = 'NodeAPI';
 
