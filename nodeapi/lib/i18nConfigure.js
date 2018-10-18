@@ -10,7 +10,8 @@ module.exports = function() {
         directory: path.join(__dirname, '..', 'locales'),
         defaultLocale: 'en',
         autoReload: true,
-        syncFiles: true
+        syncFiles: true,
+        cookie: 'nodeapi-lang' // Usar locale de esta cookie
 
     });
  
