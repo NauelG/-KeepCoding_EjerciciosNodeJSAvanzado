@@ -35,7 +35,7 @@ class LoginController {
                 res.locals.email = email;
                 res.locals.error = res.__('Invalid credetials');
                 res.render('login');
-
+                return;
             }
 
             // Respuesta si login
