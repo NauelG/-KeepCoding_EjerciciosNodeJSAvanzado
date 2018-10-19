@@ -54,6 +54,7 @@ app.use('/apiv1/agentes', require('./routes/apiv1/agentes'));
 app.use('/',        require('./routes/index'));
 app.use('/about',   require('./routes/about'));
 app.use('/lang',   require('./routes/lang'));
+app.use('/privado',   require('./routes/privado'));
 app.get('/login', loginController.index); // Utilizamos el método index de la clase login.
 app.post('/login', loginController.post);
 
