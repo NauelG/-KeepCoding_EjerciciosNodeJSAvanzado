@@ -1,5 +1,8 @@
 {
 	"Application title": "Titulo de la aplicación",
 	"Name and age": "Hola, me llamo {{nombre}} y tengo {{age}} años.",
-	"This is an amazing app!": "Esta es una app maravillosa!"
+	"This is an amazing app!": "Esta es una app maravillosa!",
+	"Login": "Login",
+	"Please login to access": "Por favor identifícate para acceder",
+	"Invalid credetials": "Invalid credetials"
 }

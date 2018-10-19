@@ -24,10 +24,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Configuramos multiidioma en express
 const i18n = require('./lib/i18nConfigure')();
 app.use(i18n.init);
-
+/*
 console.log(i18n.__('Application title'));
 console.log(i18n.__('Name and age', {name: 'Javier', age: 46}));
 console.log(i18n.__({phrase: 'Application title', locale: 'es'})); // Forzar locale
+*/
 
 // Variables globales de template
 app.locals.titulo = 'NodeAPI';
@@ -47,9 +48,14 @@ app.use('/apiv1/agentes', require('./routes/apiv1/agentes'));
 /**
  * Rutas de mi aplicación web
  */
+
+ const loginController = require('./routes/loginControler');
+
 app.use('/',        require('./routes/index'));
 app.use('/about',   require('./routes/about'));
 app.use('/lang',   require('./routes/lang'));
+app.get('/login', loginController.index); // Utilizamos el método index de la clase login.
+app.post('/login', loginController.post);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
