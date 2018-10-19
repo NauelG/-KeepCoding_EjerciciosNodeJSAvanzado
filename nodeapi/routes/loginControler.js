@@ -2,13 +2,15 @@
 
 const Usuario = require('../models/Usuario');
 
+const bcrypt = require('bcrypt');
+
 // Creamos un Controller que nos servirá asociar a rutas en app.js
 
 class LoginController {
 
     // GET '/'
     index(req, res, next) {
-        res.locals.email = '';
+        res.locals.email = process.env.NODE_ENV === 'development' ? 'admin@example.com' : '';
         res.locals.error = '';
         res.render('login');
     }
@@ -22,13 +24,12 @@ class LoginController {
             const email = req.body.email;
             const password = req.body.password;
 
-            console.log(email, password);
 
             // Buscamos al usuario
             const usuario = await Usuario.findOne({ email: email });
             console.log('Usuario encontrado:',usuario);
 
-            if ( !usuario || password !== usuario.password ) {
+            if ( !usuario || !await bcrypt.compare(password, usuario.password) ) {
 
                 // Respuesta si no login
                 res.locals.email = email;
@@ -38,6 +39,7 @@ class LoginController {
             }
 
             // Respuesta si login
+            res.send('OK');
 
 
         } catch(err) {
