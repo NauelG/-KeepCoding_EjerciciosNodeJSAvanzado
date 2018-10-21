@@ -61,6 +61,15 @@ app.use(session({
 }));
 
 /**
+ * Auth helper middleware
+ * Acceso a la sesión desde las vistas
+ */
+app.use((req, res, next) => {
+  res.locals.session = req.session;
+  next();
+});
+
+/**
  * Rutas de mi aplicación web
  */
 const loginController = require('./routes/loginControler');
