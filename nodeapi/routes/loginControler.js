@@ -38,13 +38,34 @@ class LoginController {
                 return;
             }
 
+            // Crear sesión usuario
+            req.session.authUser = {
+                _id: usuario._id
+            };
+
             // Respuesta si login
-            res.send('OK');
+            res.redirect('/privado');
 
 
         } catch(err) {
             next(err);
         }
+    }
+
+    // GET /logout
+    logout(req, res, next) {
+
+        delete req.session.authUser; // Borrar authUser de la sessión.
+
+        req.session.regenerate( function(err) {
+
+            if (err) {
+                next(err);
+                return;
+            }
+
+            res.redirect('/');
+        });
     }
 
 }

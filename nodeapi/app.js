@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require('express-session');
 
 const { isAPI } = require('./lib/utils');
 
@@ -46,10 +47,23 @@ require('./models/Agente');
 app.use('/apiv1/agentes', require('./routes/apiv1/agentes'));
 
 /**
+ * Inicializamos las sesions
+ */
+app.use(session({
+  name: 'nodeapi-session',
+  secret: ';44z,a,J3$[[4,)&*J6BxRSa^y/6`:Ht4GvR#=Ky{T',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false, // Si true solo se enviara con HTTPS
+    maxAge: 2 * 24 * 60 * 60 * 1000 // 2 días de inactividad
+  }
+}));
+
+/**
  * Rutas de mi aplicación web
  */
-
- const loginController = require('./routes/loginControler');
+const loginController = require('./routes/loginControler');
 
 app.use('/',        require('./routes/index'));
 app.use('/about',   require('./routes/about'));
@@ -57,6 +71,7 @@ app.use('/lang',   require('./routes/lang'));
 app.use('/privado',   require('./routes/privado'));
 app.get('/login', loginController.index); // Utilizamos el método index de la clase login.
 app.post('/login', loginController.post);
+app.get('/logout', loginController.logout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
