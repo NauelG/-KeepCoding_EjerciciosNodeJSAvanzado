@@ -1,5 +1,7 @@
 'use strict';
 
+const namedRoutes = require('./namedRoutes');
+
 /**
  * Middleware que sirve para comprovar si un usuario está autenticado.
  * 
@@ -11,12 +13,12 @@ module.exports = function() {
 
         if (!req.session.authUser) {
             // Res si no logado.
-            res.redirect('/login');
+            res.redirect(namedRoutes.login);
             return;
         }
 
         // Res si logado.
         next();
-        
+
     };
 };

@@ -1,8 +1,8 @@
 'use strict';
 
 const Usuario = require('../models/Usuario');
-
 const bcrypt = require('bcrypt');
+const namedRoutes = require('../lib/namedRoutes');
 
 // Creamos un Controller que nos servirá asociar a rutas en app.js
 
@@ -44,7 +44,7 @@ class LoginController {
             };
 
             // Respuesta si login
-            res.redirect('/privado');
+            res.redirect(namedRoutes.privado);
 
 
         } catch(err) {
@@ -64,7 +64,7 @@ class LoginController {
                 return;
             }
 
-            res.redirect('/');
+            res.redirect(namedRoutes.home);
         });
     }
 
