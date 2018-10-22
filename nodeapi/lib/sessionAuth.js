@@ -1,6 +1,7 @@
 'use strict';
 
 const namedRoutes = require('./namedRoutes');
+const Usuario = require('../models/Usuario');
 
 /**
  * Middleware que sirve para comprovar si un usuario está autenticado.
@@ -18,7 +19,11 @@ module.exports = function() {
         }
 
         // Res si logado.
-        next();
+        // Recuperamos el usuario.
+        Usuario.findById(req.session.authUser._id).then( usuario => {
+            req.user = usuario;
+            next();
+        });
 
     };
 };

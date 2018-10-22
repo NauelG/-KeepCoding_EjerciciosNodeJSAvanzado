@@ -28,12 +28,10 @@ router.post('/sendEmail', async (req, res, next) => {
     try {
 
         const texto = req.body.texto;
-
-        // Recuperamos el usuario.
-        const usuario = await Usuario.findById(req.session.authUser._id);
     
         // Le enviamos un email.
-        usuario.sendEmail('NodeAPI <admin@nodeapi.com>', 'Prueba de email', texto);
+        req.user.sendEmail('NodeAPI <admin@nodeapi.com>', 'Prueba de email', texto);
+        
         // Respondemos.
         res.json({ success: true, result: 'Sent'});
     } catch(err) {
