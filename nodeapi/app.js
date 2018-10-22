@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 const { isAPI } = require('./lib/utils');
 
@@ -56,8 +57,13 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     secure: false, // Si true solo se enviara con HTTPS
-    maxAge: 2 * 24 * 60 * 60 * 1000 // 2 días de inactividad
-  }
+    maxAge: 2 * 24 * 60 * 60 * 1000, // 2 días de inactividad
+    httpOnly: true
+  },
+  store: new MongoStore({
+    // como conectarse a la base de datos
+    url: process.env.MONGOOSE_CONNECTION_STRING
+  })
 }));
 
 /**
