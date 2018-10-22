@@ -35,10 +35,11 @@ router.post('/sendEmail',[
         const texto = req.body.texto;
     
         // Le enviamos un email.
-        req.user.sendEmail('NodeAPI <admin@nodeapi.com>', 'Prueba de email', texto);
+        await req.user.sendEmail('NodeAPI <admin@nodeapi.com>', 'Prueba de email', texto);
 
         // Respondemos.
         res.json({ success: true, result: 'Sent'});
+
     } catch(err) {
         next(err);
         return;
