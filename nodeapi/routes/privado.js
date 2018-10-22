@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const sessionAuth = require('../lib/sessionAuth');
 const Usuario = require('../models/Usuario');
+const { body, validationResult } = require('express-validator/check');
 
 /**
  * Pasamos por el middleware de auth todas las peticiones de la ruta.
@@ -23,15 +24,19 @@ router.get('/', (req, res, next) => {
  * POST /sendEmail
  * Envía un email al usuario logueado en el site.
  */
-router.post('/sendEmail', async (req, res, next) => {
+router.post('/sendEmail',[
+    body('texto').isString().withMessage('debe ser un texto') // Validaciones del body
+], async (req, res, next) => {
 
     try {
+
+        validationResult(req).throw() // Pasa los errores de validación a next(err)
 
         const texto = req.body.texto;
     
         // Le enviamos un email.
         req.user.sendEmail('NodeAPI <admin@nodeapi.com>', 'Prueba de email', texto);
-        
+
         // Respondemos.
         res.json({ success: true, result: 'Sent'});
     } catch(err) {
