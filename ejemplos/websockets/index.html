@@ -37,6 +37,10 @@
           socket.on('chat message', function(msg) {
               $('#messages').append($('<li>').text(msg)); // Añado un li con el texto del msg
           });
+
+          socket.on('Pasa un segundo', function() {
+            $('#messages').append($('<li>').text('El servidor dice que ha pasado un segundo')); // Añado un li con el texto del msg
+          })
       });
     </script>
   </body>
