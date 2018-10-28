@@ -1,11 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
+const namedRoutes = require('../lib/namedRoutes');
+
 const { query, validationResult } = require('express-validator/check');
 /* Es lo mismo que:
 const validator = require('express-validator/check');
 const query = validator.query;
 const validationResult = validator.validationResult;*/
+
+const upload = require('../lib/uploadConfig');
 
 
 /* GET home page. */
@@ -69,5 +73,11 @@ router.post('/enelbody', (req, res, next) => {
   console.log('req.body', req.body);
   res.send('ok');
 });
+
+// Upload de fichero
+router.post('/upload', upload.single('imagen'), (req, res, next) => {
+  console.log('Upload', req.file);
+  res.redirect(namedRoutes.home);
+})
 
 module.exports = router;
